@@ -1,0 +1,40 @@
+<h4>Gestion des categories</h4>
+<div *ngIf="showFormUser">
+  <form [formGroup]="formCat" (ngSubmit)="envoyerForm()">
+  
+    <div class="form-group">
+        <label class="center-block">Nom:
+          <input class="form-control" formControlName="nom">
+        </label>
+      </div>
+      <button type="submit" class="btn btn-success text-center" ><i class="fas fa-plus"></i>  Ajouter</button>
+   
+</form>
+</div>
+
+<button *ngIf="showBtnAjo" class="btn btn-success" (click)="showForm()"><i class="fas fa-plus"></i> Ajouter </button>
+<table class="table">
+    <thead>
+      <tr>
+        
+        <th scope="col">Id</th>
+        <th scope="col">Nom</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cat of listCat">
+        
+        <td>{{cat.id}}</td>
+        <td>{{cat.nom}}</td>
+        
+        <td><button type="button" class="btn btn-danger" (click)="deleteUser(cat.id)"onClick="window.location.reload();" ><i class="fas fa-trash"></i>  Supprimer</button></td>
+        <td><button type="button" class="btn btn-primary" [routerLink]="['update',cat.id]" ><i class="fas fa-edit"></i>Modifier</button></td>
+      </tr>
+     
+    </tbody>
+  </table>
+ 
+  
+

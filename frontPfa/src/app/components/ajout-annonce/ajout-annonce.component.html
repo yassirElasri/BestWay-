@@ -1,0 +1,69 @@
+<main class="mt-5 pt-4" style="
+margin-bottom: 160px;
+">
+    <div class="container dark-grey-text mt-5">
+        <h3><i class="fas fa-bullhorn"></i> Ajouter une annonce</h3>
+        <hr>
+<form [formGroup]="formPro" (ngSubmit)="envoyerForm2()" enctype="multipart/form-data">
+  
+  
+  
+  
+  
+  
+    <div class="form-group">
+  
+      <label for="name" class="control-label col-md-2"> <i class="fab fa-product-hunt"></i> Nom:</label>
+      <div class="col-md-10">
+            <input class="form-control" formControlName="nom">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="name" class="control-label col-md-2"><i class="far fa-keyboard"></i> Description:</label>
+            <div class="col-md-10">
+            <input  class="form-control input-lg" formControlName="description">
+          </div>
+         
+        </div>
+        <div class="form-group">
+         
+          <label for="name" class="control-label col-md-2">  <i class="fas fa-dollar-sign"></i> Prix:</label>
+          <div class="col-md-10"> 
+          <input class="form-control" formControlName="prix">
+          </div>
+        </div>
+        <div class="form-group">
+          
+            <label for="name" class="control-label col-md-2">  <i class="fas fa-sort-numeric-up-alt"></i> Quantite:</label>
+          <div class="col-md-10">
+            <input class="form-control" formControlName="quantite">
+          </div>
+        </div>
+        <div class="form-group">
+         
+            <label for="name" class="control-label col-md-2"><i class="fas fa-box-open"></i> Categorie:</label>
+          <div class="col-md-10">
+              <select formControlName="categorie_id" id="pet-select" class="form-control" >
+                <option value=""  disabled  [attr.selected]=true>Choisir un categorie</option>
+               
+                  <option *ngFor="let cat of listCat" value={{cat.id}}>{{cat.nom}}</option>
+                 
+              </select>
+            </div>
+        </div>
+        
+  <div class="col-md-6">
+        <i class="fas fa-camera"></i> </div> 
+        <div class="col-md-6">
+        <input type="file" accept="image/*" (change)="onSelectFile($event)" name="file">
+    </div>
+        <img [src]="imgUrl" height="200" *ngIf="imgUrl">
+      
+        
+  
+        <div class="text-center">
+        <button type="submit" class="btn btn-success text-center" ><i class="fas fa-plus"></i>  Ajouter</button>
+     </div>
+  </form>
+</div>
+</main>
