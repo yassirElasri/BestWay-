@@ -62,6 +62,10 @@ public class CategorieController {
 		}
 		
 	}
+	@GetMapping("/count")
+	public long countCategorie(){	
+			return  (this.categorietRespositry.count());
+	}
 }
 
 

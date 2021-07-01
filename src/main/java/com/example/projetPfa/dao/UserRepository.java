@@ -12,4 +12,6 @@ import com.example.projetPfa.entites.User;
 @Repository
 public interface UserRepository  extends JpaRepository<User,Integer> {
 	List<User> findByRole(String role);
+	User findByEmail(String email);
+	 long countByRole(String name);
 }

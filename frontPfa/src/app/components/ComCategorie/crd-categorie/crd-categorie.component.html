@@ -1,13 +1,14 @@
-<h4>Gestion des categories</h4>
+<h4><i class="fas fa-box-open"></i> Gestion des categories </h4>
 <div *ngIf="showFormUser">
   <form [formGroup]="formCat" (ngSubmit)="envoyerForm()">
   
     <div class="form-group">
-        <label class="center-block">Nom:
+        <label class="center-block"><i class="fas fa-box-open"></i> Nom:
           <input class="form-control" formControlName="nom">
+          <small *ngIf="formCat.get('nom').invalid && formCat.get('nom').touched " class="text-danger"> *Le nom est requis</small>
         </label>
       </div>
-      <button type="submit" class="btn btn-success text-center" ><i class="fas fa-plus"></i>  Ajouter</button>
+      <button [disabled]="formCat.invalid" type="submit" class="btn btn-success text-center" ><i class="fas fa-plus"></i>  Ajouter</button>
    
 </form>
 </div>

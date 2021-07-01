@@ -1,12 +1,14 @@
+<h4>Modifier une categories <i class="fas fa-box-open"></i></h4>
 <form [formGroup]="updateForm" (ngSubmit)="updateFinal()">
     <div class="form-group">
-      <label class="center-block">Nom:
+      <label class="center-block"><i class="fas fa-box-open"></i> Nom:
         <input class="form-control" formControlName="nom">
+        <small *ngIf="updateForm.get('nom').invalid && updateForm.get('nom').touched " class="text-danger"> *Le nom est requis</small>
       </label>
     </div>
     
 
-      <button type="submit" class="btn btn-primary text-center" ><i class="fas fa-edit"></i>  Modifier</button>
+      <button [disabled]="updateForm.invalid" type="submit" class="btn btn-primary text-center" ><i class="fas fa-edit"></i>  Modifier</button>
    
 </form>
 

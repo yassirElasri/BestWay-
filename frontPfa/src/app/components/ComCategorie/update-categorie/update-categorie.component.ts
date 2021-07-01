@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup ,Validators} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Categorie } from 'src/app/model/Categorie';
 import { HttpServiceCategorieService } from 'src/app/services/http-service-categorie.service';
@@ -12,13 +13,13 @@ import { HttpServiceCategorieService } from 'src/app/services/http-service-categ
 export class UpdateCategorieComponent implements OnInit {
   CatTrouve: Categorie;
   updateForm:FormGroup;
-    constructor(private httpService :HttpServiceCategorieService ,private construireForm:FormBuilder,private rout:ActivatedRoute,private router: Router) { 
+    constructor(private httpService :HttpServiceCategorieService ,private construireForm:FormBuilder,private rout:ActivatedRoute,private router: Router,private toastr:ToastrService) { 
       
     }
   
     ngOnInit(): void {
       this.updateForm=this.construireForm.group({
-        nom:['']
+        nom:['',Validators.required]
       
         });
       const id=this.rout.snapshot.paramMap.get('id');
@@ -37,5 +38,9 @@ export class UpdateCategorieComponent implements OnInit {
     }
    updateFinal(){
      this.httpService.updateUser(this.CatTrouve.id,this.updateForm.value).subscribe();
-     this.router.navigate(['/categorie']);
+     this.toastr.success('Modifié avec succès','succès',{
+      timeOut:1000,
+      progressBar:true
+    })
+     this.router.navigate(['admin/categorie']);
    } }

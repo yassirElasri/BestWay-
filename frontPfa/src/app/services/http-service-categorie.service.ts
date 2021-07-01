@@ -25,4 +25,9 @@ return this.http.get<Categorie []>("http://127.0.0.1:8080/categorie/findall");
               public updateUser(id:number,categorie:Categorie) {
                 return this.http.put<Categorie []>("http://127.0.0.1:8080/categorie/update/"+id,categorie);
                   }
+                  public countCategorie() {
+                            
+                    return this.http.get ("http://127.0.0.1:8080/categorie/count");
+                      
+                  }
 }

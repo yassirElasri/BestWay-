@@ -27,6 +27,7 @@ export class HomeProduitComponent implements OnInit {
       nom:[''],
     
       });
+      this.isUserLoggedIn();
   }
   produitBycat(id){
     this.httpServiceProduit.findProduitByCat(id).subscribe(cat=>this.listProduit=cat);
@@ -37,5 +38,17 @@ export class HomeProduitComponent implements OnInit {
     this.httpServiceProduit.findProduitByNom(this.nomProduit).subscribe(cat=>this.listProduit=cat);
    
   }
-
+  isUserLoggedIn() {
+    let user = sessionStorage.getItem('username')
+  
+     if(user === null){ 
+   
+       return false;
+      
+     }
+     else{
+       return true;
+      
+     }
+    }
 }

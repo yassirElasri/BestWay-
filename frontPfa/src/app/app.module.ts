@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import{BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CrdCategorieComponent } from './components/ComCategorie/crd-categorie/crd-categorie.component';
@@ -17,6 +18,12 @@ import { DetailsProduitComponent } from './components/details-produit/details-pr
 import { AjoutAnnonceComponent } from './components/ajout-annonce/ajout-annonce.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserComponentComponent } from './components/user-component/user-component.component';
+import { VendeurComponentComponent } from './components/user-component/vendeur-component/vendeur-component.component';
+import { ClientComponentComponent } from './components/user-component/client-component/client-component.component';
+import { AjoutUserGeneralComponent } from './components/user-component/ajout-user-general/ajout-user-general.component';
+import { UpdateUserGeneralComponent } from './components/user-component/update-user-general/update-user-general.component';
+import { RegisterComponent } from './components/login/register/register.component';
+import { GesAchatComponent } from './components/ges-achat/ges-achat.component';
 
 @NgModule({
   declarations: [
@@ -32,14 +39,22 @@ import { UserComponentComponent } from './components/user-component/user-compone
     DetailsProduitComponent,
     AjoutAnnonceComponent,
     LoginComponent,
-    UserComponentComponent
+    UserComponentComponent,
+    VendeurComponentComponent,
+    ClientComponentComponent,
+    AjoutUserGeneralComponent,
+    UpdateUserGeneralComponent,
+    RegisterComponent,
+    GesAchatComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

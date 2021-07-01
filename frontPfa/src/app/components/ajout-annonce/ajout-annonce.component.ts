@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+
+import { FormBuilder, FormGroup ,Validators} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Categorie } from './../../model/Categorie';
 import {HttpServiceCategorieService} from './../../services/http-service-categorie.service';
@@ -21,17 +23,18 @@ formPro:FormGroup;
 idCat:number;
 public imagePath;
 
-  constructor(private httpService :HttpServiceCategorieService ,private httpServiceProduit :ProduitServiceService ,private construireForm:FormBuilder,private router:Router ,private homcomp:HomeTempleteComponent) { }
+  constructor(private httpService :HttpServiceCategorieService ,private httpServiceProduit :ProduitServiceService ,private construireForm:FormBuilder,private router:Router ,private homcomp:HomeTempleteComponent,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.homcomp.currentPage="ajouter";
     this.httpService.fetchAll().subscribe(cat=>this.listCat=cat);
     this.formPro=this.construireForm.group({
-      nom:[''],
-      description:[''],
-      prix:[],
-      quantite:[],
-      categorie_id:[''],
+      nom:['',Validators.required],
+      description:['',Validators.required],
+      prix:[,Validators.required,Validators.min(1)],
+      quantite:[,Validators.required,Validators.min(1)],
+      categorie_id:['',Validators.required],
+     
       
     });
   }
@@ -43,12 +46,19 @@ const produit=this.formPro.value;
 formData.append('produit',JSON.stringify(produit));
 formData.append('file',this.userFile);
 this.httpServiceProduit.addProduit(this.idCat,formData).subscribe(
-  data=>{this.router.navigate(['/produit']);
+  data=>{this.router.navigate(['/home/produit']);
+  this.toastr.success('Ajouté avec succès','succès',{
+    timeOut:1500,
+    progressBar:true
+  })
+}
+);
+
 }
 
-);
+
   
-  } envoyerForm(){
+   envoyerForm(){
     this.idCat=  this.formPro.controls.categorie_id.value;
     console.log(this.idCat);
    // this.httpServiceProduit.addProduit(this.idCat,this.formPro.value)).subscribe();

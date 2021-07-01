@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup ,Validators} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Categorie } from './../../../model/Categorie';
 import {HttpServiceCategorieService} from './../../../services/http-service-categorie.service';
+import {AdminTempleteComponent} from './../../admin-templete/admin-templete.component'
 @Component({
   selector: 'app-crd-categorie',
   templateUrl: './crd-categorie.component.html',
@@ -10,7 +12,7 @@ import {HttpServiceCategorieService} from './../../../services/http-service-cate
 })
 export class CrdCategorieComponent implements OnInit {
 
-  constructor(private httpService :HttpServiceCategorieService ,private construireForm:FormBuilder,private router:Router) { }
+  constructor(private httpService :HttpServiceCategorieService ,private construireForm:FormBuilder,private router:Router,private toastr:ToastrService,private compAdmin: AdminTempleteComponent) { }
 listCat:Categorie[];
 formCat:FormGroup;
 formCatUpdate:FormGroup;
@@ -21,13 +23,19 @@ CatTrouve:Categorie;
   ngOnInit(): void {
     this.httpService.fetchAll().subscribe(cat=>this.listCat=cat);
     this.formCat=this.construireForm.group({
-    nom:[''],
+    nom:['',Validators.required],
   
     });
   }
   envoyerForm(){
     this.httpService.addUser(this.formCat.value).subscribe();
+   this.compAdmin.countCategorie=this.compAdmin.countCategorie+1;
     this.ngOnInit();
+    this.toastr.success('Ajouté avec succès','succès',{
+      timeOut:1000,
+      progressBar:true
+    })
+    this.formCat.reset();
   }
   showForm(){
 this.showFormUser=!this.showFormUser;
@@ -35,7 +43,12 @@ this.showBtnAjo=!this.showBtnAjo;
   }
   deleteUser(id:number){
     this.httpService.deleteUser(id).subscribe();
-    this.router.navigate(['/categorie']);
+     this.toastr.success('Supprimé avec succès','succès',{
+      timeOut:1000,
+      progressBar:true
+    })
+    this.router.navigate(['admin/categorie']);
+   
       }
       showFormUpdate(id:number){
         this.showUpdate=!this.showUpdate;
@@ -51,7 +64,7 @@ this.showBtnAjo=!this.showBtnAjo;
           });}
           updateFinal(){
             this.httpService.updateUser(this.CatTrouve.id,this.formCatUpdate.value).subscribe();
-            this.router.navigate(['/categorie']);
+            this.router.navigate(['admin/categorie']);
           }
 
           }

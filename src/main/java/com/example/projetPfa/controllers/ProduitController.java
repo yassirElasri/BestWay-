@@ -167,5 +167,10 @@ public class ProduitController {
 	public List<Produit> findproByNom(@PathVariable String nom){
 		return this.produittRespositry.findByNomContains(nom);
 		}
+	@GetMapping("/count")
+	public long countProduit(){	
+		long count=this.produittRespositry.count();
+			return  count;
+	}
 
 }

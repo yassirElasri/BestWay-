@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Material Design Bootstrap</title>
+  <title></title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   
@@ -47,8 +47,8 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
-        <strong class="blue-text">MDB</strong>
+      <a class="navbar-brand waves-effect" [routerLink]="['produit']">
+        <strong class="blue-text">BESTWAY</strong>
       </a>
 
       <!-- Collapse -->
@@ -68,7 +68,7 @@
             </a>
           </li>
          
-          <li [ngClass]="currentPage=='ajouter'?'active':''" class="nav-item">
+          <li *ngIf="role==='vendeur'" [ngClass]="currentPage=='ajouter'?'active':''"  class="nav-item">
             <a class="nav-link waves-effect" [routerLink]="['produit/ajouter']"
             >  Ajouter une annonce <i class="fas fa-bullhorn"></i></a>
           </li>
@@ -76,28 +76,36 @@
         </ul>
 
         <!-- Right -->
-        <ul class="navbar-nav nav-flex-icons">
+        <ul class="navbar-nav nav-flex-icons mr-4">
           <li class="nav-item">
             <a class="nav-link waves-effect">
-              <span class="badge red z-depth-1 mr-1"> 1 </span>
+              <span class="badge red z-depth-1 mr-1"> 0 </span>
               <i class="fas fa-shopping-cart"></i>
               <span class="clearfix d-none d-sm-inline-block"> Cart </span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">
+            <a  class="nav-link waves-effect" target="_blank">
               <i class="fab fa-facebook-f"></i>
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://twitter.com/MDBootstrap" class="nav-link waves-effect" target="_blank">
+            <a  class="nav-link waves-effect" target="_blank">
               <i class="fab fa-twitter"></i>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="nav-link border border-light rounded waves-effect"
-              target="_blank">
-              <i class="fas fa-sign-in-alt"></i>Login
+          <li  *ngIf="isUserLoggedIn()" class="nav-item" (click)="logOut()">
+            <a  class="nav-link border border-light rounded waves-effect"
+              >
+              
+              <i class="fas fa-sign-in-alt" ></i>Déconnexion
+            </a>
+          </li>
+          <li *ngIf="!isUserLoggedIn()"class="nav-item">
+            <a [routerLink]="['login']" class="nav-link border border-light rounded waves-effect"
+              >
+              <i  class="fas fa-sign-in-alt" ></i>Login
+             
             </a>
           </li>
         </ul>
@@ -123,37 +131,31 @@
     <!--Copyright-->
     <div class="footer-copyright py-3">
       © 2021 Copyright : 
-        <a href="https://www.facebook.com/mdbootstrap" target="_blank">
+        <a  target="_blank">
           <i class="fab fa-facebook-f mr-3"></i>
         </a>
   
-        <a href="https://twitter.com/MDBootstrap" target="_blank">
+        <a  target="_blank">
           <i class="fab fa-twitter mr-3"></i>
         </a>
   
-        <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
+        <a target="_blank">
           <i class="fab fa-youtube mr-3"></i>
         </a>
   
-        <a href="https://plus.google.com/u/0/b/107863090883699620484" target="_blank">
+        <a  target="_blank">
           <i class="fab fa-google-plus-g mr-3"></i>
         </a>
   
-        <a href="https://dribbble.com/mdbootstrap" target="_blank">
+        <a  target="_blank">
           <i class="fab fa-dribbble mr-3"></i>
         </a>
   
-        <a href="https://pinterest.com/mdbootstrap" target="_blank">
+        <a  target="_blank">
           <i class="fab fa-pinterest mr-3"></i>
         </a>
   
-        <a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
-          <i class="fab fa-github mr-3"></i>
-        </a>
-  
-        <a href="http://codepen.io/mdbootstrap/" target="_blank">
-          <i class="fab fa-codepen mr-3"></i>
-        </a>
+        
       
     </div>
     <!--/.Copyright-->

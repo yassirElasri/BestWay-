@@ -43,14 +43,114 @@ margin-bottom: 180px;
             <span>{{produit.nom}} </span>
             <p>{{produit.description}}.</p>
 
-            <form class="d-flex justify-content-left">
+            <form [formGroup]="formQuantite" class="d-flex justify-content-left">
               <!-- Default input -->
-              <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
-              <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
-                <i class="fas fa-shopping-cart ml-1"></i>
-              </button>
+              <input formControlName="quantite" type="number" value="1" aria-label="Search" class="form-control" style="width: 100px"required min="1">
+              </form>
+              <div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog cascading-modal" role="document">
+                  <!--Content-->
+                  <div class="modal-content">
+              
+                    <!--Modal cascading tabs-->
+                    <div class="modal-c-tabs">
+              
+                      <!-- Nav tabs -->
+                      <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fas fa-credit-card mr-1"></i>
+                           En Ligne</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="far fa-handshake mr-1"></i>
+                           Paiement à la livraison</a>
+                        </li>
+                      </ul>
+              
+                      <!-- Tab panels -->
+                      <div class="tab-content">
+                        <!--Panel 7-->
+                        <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+              
+                          <!--Body-->
+                          <div class="modal-body mb-1">
+                           
+                            <div class="md-form form-sm m-4">
+                              <i class="fas fa-credit-card prefix"></i>
+                              <input type="text" id="modalLRInput10" class="form-control form-control-sm validate">
+                              <label data-error="wrong" data-success="right" for="modalLRInput10">Numero de carte</label>
+                            </div>
+                            <div class="row m-4 mb-1">
+                            <div class="md-form form-sm ">
+                              <i class="fas fa-calendar-week prefix"></i>
+                              <input type="text" id="modalLRInput11" class="form-control form-control-sm validate">
+                              <label data-error="wrong" data-success="right" for="modalLRInput11">Date d'expiration</label>
+                             
+                            </div>
+                            <div class="md-form form-sm ">
+                              <i class="fas fa-lock prefix"></i>
+                              <input type="password" id="modalLRInput11" class="form-control form-control-sm validate">
+                              <label data-error="wrong" data-success="right" for="modalLRInput11">Code</label>
+                             
+                            </div>
+                          </div>
+                            <div class="text-center mt-0">
+                              <button class="btn btn-info" (click)="payerEnligne()" data-dismiss="modal">Payer <i class="fas fa-credit-card ml-1"></i></button>
+                            </div>
+                          </div>
+              
+                          <!--Footer-->
+                          <div class="modal-footer">
+                            
+                            <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal"> <i class="fas fa-times"></i> Fermer</button>
+                          </div>
+              
+                        </div>
+                        <!--/.Panel 7-->
+              
+                        <!--Panel 8-->
+                        <div class="tab-pane fade" id="panel8" role="tabpanel">
+              
+                          <!--Body-->
+                          <div class="modal-body">
+                            <div class="md-form form-sm mb-5">
+                              <i class="fas fa-map-marker-alt prefix"></i>
+                              <input type="text" id="modalLRInput12" class="form-control form-control-sm validate">
+                              <label data-error="wrong" data-success="right" for="modalLRInput12">Votre adresse</label>
+                            </div>
+              
+                           
+              
+                           
+              
+                            <div class="text-center form-sm mt-2">
+                              <button class="btn btn-info" (click)="payerCash()" data-dismiss="modal">Demander <i class="far fa-handshake ml-1"></i></button>
+                            </div>
+              
+                          </div>
+                          <!--Footer-->
+                          <div class="modal-footer">
+                            
+                            <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal"> <i class="fas fa-times"></i> Fermer</button>
+                          </div>
+                        </div>
+                        <!--/.Panel 8-->
+                      </div>
+              
+                    </div>
+                  </div>
+                  <!--/.Content-->
+                </div>
+              </div>
+              <!--Modal: Login / Register Form-->
+              
+              <div class="text-center">
+                <a style="position: absolute;
+                left: 145px;
+                top: 219px;" href="" class="btn btn-primary btn-md my-0 p" data-toggle="modal" data-target="#modalLRForm">Acheter <i class="fas fa-shopping-cart ml-1"></i></a>
+              </div>
 
-            </form>
+          
 
           </div>
           <!--Content-->
@@ -60,5 +160,8 @@ margin-bottom: 180px;
 
       </div>
     </div>
+        <!--payment-->
+        <!--Modal: Login / Register Form-->
+
 
     </main>

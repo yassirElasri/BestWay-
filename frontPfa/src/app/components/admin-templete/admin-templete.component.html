@@ -8,7 +8,7 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" [routerLink]="['categorie']">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-toolbox"></i>
                 </div>
@@ -18,7 +18,7 @@
             <hr class="sidebar-divider my-0">
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="~/Home/Index">
+                <a class="nav-link" [routerLink]="['categorie']">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Accueill</span>
                 </a>
@@ -44,26 +44,26 @@
             </li>
           
             <li class="nav-item active">
-                <a class="nav-link" [routerLink]="['user','vendeur']">
+                <a class="nav-link" [routerLink]="['./user/vendeur']">
                     <i class="fas fa-users"></i>
                     <span>Vendeurs</span>
                 </a>
             </li>
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item active">
-                <a class="nav-link" [routerLink]="['user','client']">
+                <a class="nav-link" [routerLink]="['user/client']">
                     <i class="fas fa-users"></i>
                     <span>Clients</span>
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" [routerLink]="['user','admin']">
+                <a class="nav-link" [routerLink]="['user/admin']">
                     <i class="fas  fa-user"> </i>
                     <span>Utilisateurs</span>
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="~/Account/IndexAdmin">
+                <a class="nav-link" [routerLink]="['commandes']">
                     <i class="fas fa-cart-arrow-down"></i>
                     <span>Commandes</span>
                 </a>
@@ -100,31 +100,17 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
-                                <img class="img-profile rounded-circle"
-                                     src="assets/tempAdmin/img/undraw_profile.svg">
+                       
+                            
+                            <a class="dropdown-item" (click)="logOut()" >
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Deconnexion
                             </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                 aria-labelledby="userDropdown">
-
-                                <a class="dropdown-item" href="~/Account/modifierProfile">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-
-                                <div class="dropdown-divider"></div>
+                           
                                
                                   
-                                    <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Deconnexion
-                                    </a>
-                            </div>
-                        </li>
+                            
+                       
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
@@ -142,7 +128,7 @@
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Categorie
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">3 </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{countCategorie}} </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-box-open fa-2x text-gray-300"></i> 
@@ -160,7 +146,7 @@
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Produites
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{countProduit}}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fab fa-product-hunt fa-2x text-gray-300"></i> 
@@ -178,7 +164,7 @@
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Commandes
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{countCommandes}}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-cart-arrow-down fa-2x text-gray-300"></i> 
@@ -195,7 +181,7 @@
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Clients
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{countClient}}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-users fa-2x text-gray-300"></i>

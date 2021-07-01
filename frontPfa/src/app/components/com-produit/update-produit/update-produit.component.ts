@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup ,Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Categorie } from 'src/app/model/Categorie';
 import { Produit } from 'src/app/model/Produit';
 import { ProduitServiceService } from 'src/app/services/produit-service.service';
@@ -23,7 +24,7 @@ msg:string;
   id:String;
   idCat:number;
  
-    constructor(private httpService :ProduitServiceService  ,private httpServiceCategorie :HttpServiceCategorieService  ,private construireForm:FormBuilder,private rout:ActivatedRoute,private router: Router) { 
+    constructor(private httpService :ProduitServiceService  ,private httpServiceCategorie :HttpServiceCategorieService  ,private construireForm:FormBuilder,private rout:ActivatedRoute,private router: Router,private toastr:ToastrService) { 
       
     }
   
@@ -32,7 +33,8 @@ msg:string;
       this.id=this.rout.snapshot.paramMap.get('id');
       
       this.updateForm=this.construireForm.group({
-        nom:[''],
+        
+      nom:[''],
         description:[''],
         prix:[],
         quantite:[],
@@ -83,5 +85,9 @@ msg:string;
  formData.append('file',this.userFile);
 
      this.httpService.updateProduit(this.ProduitTrouve.id,this.idCat,formData).subscribe();
-     this.router.navigate(['/produit']);
+     this.router.navigate(['/admin/produit']);
+     this.toastr.success('Modifié avec succès','succès',{
+      timeOut:1200,
+      progressBar:true
+    })
    } }

@@ -6,7 +6,7 @@ import { Produit } from '../model/Produit';
   providedIn: 'root'
 })
 export class ProduitServiceService {
-
+  count:any;
   constructor(private http: HttpClient) { }
   public fetchAll(): Observable <Produit[]>{
 return this.http.get<Produit []>("http://127.0.0.1:8080/produit/findall");
@@ -28,5 +28,10 @@ return this.http.get<Produit []>("http://127.0.0.1:8080/produit/findall");
                       }
                       public findProduitByNom(nom:string): Observable <Produit[]>{
                         return this.http.get<Produit []>("http://127.0.0.1:8080/produit/produitByName/"+nom);
-                          }
+                          } 
+                          public countProduit() {
+                            
+                          return this.http.get ("http://127.0.0.1:8080/produit/count");
+                            
+                        }
 }

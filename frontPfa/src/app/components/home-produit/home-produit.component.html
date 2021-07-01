@@ -56,11 +56,13 @@
 
           <!--Grid column-->
     
-    
-          <div *ngFor="let pro of listProduit" class="col-lg-3 col-md-6 mb-4"[routerLink]="['details',pro.id]" >
+   
+          <div *ngFor="let pro of listProduit" class="col-lg-3 col-md-6 mb-4"[routerLink]="isUserLoggedIn() ?['details',pro.id] : ['/home/login']" >
+           
+        
 
             <!--Card-->
-            <div class="card">
+            <div class="card" style="height: 400px;" >
 
               <!--Card image-->
               <div class="view overlay" style="height: 257px;">

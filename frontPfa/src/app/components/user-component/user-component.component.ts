@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from './../../model/User';
 import {UserServiceService} from './../../services/user-service.service';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-user-component',
   templateUrl: './user-component.component.html',
@@ -10,14 +12,23 @@ import {UserServiceService} from './../../services/user-service.service';
 })
 export class UserComponentComponent implements OnInit {
 
-  constructor(private httpService :UserServiceService ,private construireForm:FormBuilder,private router:Router,private rout:ActivatedRoute) { }
+  constructor(private httpService :UserServiceService ,private construireForm:FormBuilder,private router:Router,private rout:ActivatedRoute,private toastr:ToastrService ) { }
   listUser:User[];
+
  
-    role=this.rout.snapshot.paramMap.get('role');
   ngOnInit(): void {
-  
+    
+  this.httpService.fetchAll("admin").subscribe(cat=>this.listUser=cat);
    
-    this.httpService.fetchAll(this.role).subscribe(cat=>this.listUser=cat);
   }
+  deleteUser(id:number){
+    this.httpService.deleteUser(id).subscribe();
+     this.toastr.success('Supprimé avec succès','succès',{
+      timeOut:2000,
+      progressBar:true
+    })
+    this.router.navigate(['admin/user/admin']);
+   
+      }
 
 }

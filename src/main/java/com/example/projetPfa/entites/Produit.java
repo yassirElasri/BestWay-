@@ -1,4 +1,5 @@
 package com.example.projetPfa.entites;
+import java.util.Collection;
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -26,6 +28,9 @@ private Integer id;
 	@JoinColumn(name="categorie_id")
 
 	private Categorie categorie;
+    
+    
+ 
 	public Integer getId() {
 		return id;
 	}

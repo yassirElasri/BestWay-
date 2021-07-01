@@ -1,0 +1,29 @@
+<h4><i class="fas fa-cart-arrow-down"></i> Gestion des commandes</h4>
+
+<table class="table">
+    <thead>
+      <tr>
+       
+        <th scope="col">Client</th>
+        <th scope="col">Produit</th>
+        <th scope="col">Quantite</th>
+        <th scope="col">Prix Total</th>
+        <th scope="col">Mode Payment</th>
+        
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ach of listAchat">
+      
+        <td>{{ach.user.username}}</td>
+        <td>{{ach.produit.nom}}</td>
+        <td>{{ach.quantite}}</td>
+        <td>{{ach.quantite * ach.produit.prix}} DH</td>
+        <td>{{ach.modePaiement}}</td>
+        
+        
+      </tr>
+     
+    </tbody>
+  </table>

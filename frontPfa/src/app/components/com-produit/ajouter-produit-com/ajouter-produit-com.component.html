@@ -1,4 +1,4 @@
-<h4>Ajouter un produit</h4>
+<h4> <i class="fab fa-product-hunt"></i> Ajouter un produit</h4>
 <hr>
 <form [formGroup]="formPro" (ngSubmit)="envoyerForm2()" enctype="multipart/form-data">
   
@@ -12,12 +12,14 @@
     <label for="name" class="control-label col-md-2"> <i class="fab fa-product-hunt"></i> Nom:</label>
     <div class="col-md-10">
           <input class="form-control" formControlName="nom">
+          <small *ngIf="formPro.get('nom').invalid && formPro.get('nom').touched " class="text-danger"> *Le nom est requis</small>
         </div>
       </div>
       <div class="form-group">
         <label for="name" class="control-label col-md-2"><i class="far fa-keyboard"></i> Description:</label>
           <div class="col-md-10">
           <input  class="form-control input-lg" formControlName="description">
+          <small *ngIf="formPro.get('description').invalid && formPro.get('description').touched " class="text-danger"> *La description est requis</small>
         </div>
        
       </div>
@@ -25,14 +27,16 @@
        
         <label for="name" class="control-label col-md-2">  <i class="fas fa-dollar-sign"></i> Prix:</label>
         <div class="col-md-10"> 
-        <input class="form-control" formControlName="prix">
+        <input class="form-control" formControlName="prix" type="number" required min="1">
+        <small *ngIf="formPro.get('prix').invalid && formPro.get('prix').touched " class="text-danger"> *Le prix est requis et au minimum 1</small>
         </div>
       </div>
       <div class="form-group">
         
           <label for="name" class="control-label col-md-2">  <i class="fas fa-sort-numeric-up-alt"></i> Quantite:</label>
         <div class="col-md-10">
-          <input class="form-control" formControlName="quantite">
+          <input class="form-control" formControlName="quantite" type="number" required min="1">
+          <small *ngIf="formPro.get('quantite').invalid && formPro.get('quantite').touched " class="text-danger"> *La quantité est requis et au minimum 1</small>
         </div>
       </div>
       <div class="form-group">
@@ -40,7 +44,7 @@
           <label for="name" class="control-label col-md-2"><i class="fas fa-box-open"></i> Categorie:</label>
         <div class="col-md-10">
             <select formControlName="categorie_id" id="pet-select" class="form-control" >
-              <option value=""  disabled  [attr.selected]=true>Choisir un categorie</option>
+              <option value=""  disabled  [attr.selected]=true>Choisir une categorie</option>
              
                 <option *ngFor="let cat of listCat" value={{cat.id}}>{{cat.nom}}</option>
                
@@ -51,13 +55,13 @@
 <div class="col-md-6">
       <i class="fas fa-camera"></i> </div> 
       <div class="col-md-6">
-      <input type="file" accept="image/*" (change)="onSelectFile($event)" name="file">
+      <input   type="file" accept="image/*" (change)="onSelectFile($event)" name="file">
   </div>
       <img [src]="imgUrl" height="200" *ngIf="imgUrl">
     
       
 
       <div class="text-center">
-      <button type="submit" class="btn btn-success text-center" ><i class="fas fa-plus"></i>  Ajouter</button>
+      <button [disabled]="formPro.invalid" type="submit" class="btn btn-success text-center" ><i class="fas fa-plus"></i>  Ajouter</button>
    </div>
 </form>

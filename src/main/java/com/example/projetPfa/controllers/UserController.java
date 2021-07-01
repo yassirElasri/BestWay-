@@ -47,8 +47,19 @@ public class UserController {
 	@PutMapping("/update/{id}")
 	public ResponseEntity<?>updateUser(@PathVariable Integer id,@RequestBody User user){
 		if(this.userRespositry.findById(id).isPresent()) {
-			user.setId(id);
-			this.userRespositry.save(user);
+			
+			if(user.getPassword()==null) {
+				User UserUpdate=new User();
+				UserUpdate=this.userRespositry.findById(id).get();
+				user.setId(id);
+
+				user.setPassword(UserUpdate.getPassword());
+			this.userRespositry.save(user);	
+			}else {
+				user.setId(id);
+				this.userRespositry.save(user);	
+			}
+			
 			return new ResponseEntity<>(HttpStatus.OK);
 		}else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -69,4 +80,15 @@ public class UserController {
 	public List<User> findproByNom(@PathVariable String role){
 		return this.userRespositry.findByRole(role);
 		}
+	@GetMapping("/findByEmail/{email}")
+	public User finduserByEmail(@PathVariable String email){
+		
+		return this.userRespositry.findByEmail(email);
+		
+		
+		}
+	@GetMapping("/count/{name}")
+	public long countUser(String name){	
+			return  (this.userRespositry.countByRole(name));
+	}
 }
